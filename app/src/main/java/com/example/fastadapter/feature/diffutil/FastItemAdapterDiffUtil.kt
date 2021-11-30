@@ -1,4 +1,4 @@
-package com.example.fastadapter.adapter
+package com.example.fastadapter.feature.diffutil
 
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericItem
@@ -11,12 +11,12 @@ import com.mikepenz.fastadapter.adapters.ItemFilter
 /**
  * Kotlin type alias to simplify usage for an all accepting FastItemAdapter
  */
-typealias GenericFastItemAdapter = FastItemAdapter<GenericItem>
+typealias GenericFastItemAdapter = FastItemAdapterDiffUtil<GenericItem>
 
 /**
  * Created by mikepenz on 18.01.16.
  */
-open class FastItemAdapter<Item : GenericItem>(
+open class FastItemAdapterDiffUtil<Item : GenericItem>(
         /** @return the internal created [ItemAdapter] */
         val itemAdapter: ItemAdapter<Item> = items()
 ) : IItemAdapter<Item, Item> by itemAdapter, FastAdapter<Item>() {
@@ -38,7 +38,7 @@ open class FastItemAdapter<Item : GenericItem>(
      * @return this
      */
     @Deprecated(message = "Use the isUseIdDistributor property getter", replaceWith = ReplaceWith("isUseIdDistributor"), level = DeprecationLevel.WARNING)
-    open fun withUseIdDistributor(useIdDistributor: Boolean): FastItemAdapter<Item> {
+    open fun withUseIdDistributor(useIdDistributor: Boolean): FastItemAdapterDiffUtil<Item> {
         itemAdapter.isUseIdDistributor = useIdDistributor
         return this
     }
@@ -50,7 +50,7 @@ open class FastItemAdapter<Item : GenericItem>(
      * @param itemCount the count of items removed
      */
     @Deprecated(message = "removeItemRange is deprecated", replaceWith = ReplaceWith("removeRange"), level = DeprecationLevel.WARNING)
-    open fun removeItemRange(position: Int, itemCount: Int): FastItemAdapter<Item> {
+    open fun removeItemRange(position: Int, itemCount: Int): FastItemAdapterDiffUtil<Item> {
         removeRange(position, itemCount)
         return this
     }

@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FastAdapter">
         <activity
+            android:name=".feature.draggable.DraggableActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.diffutil.DiffUtilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.viewbinding.ViewBindingActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

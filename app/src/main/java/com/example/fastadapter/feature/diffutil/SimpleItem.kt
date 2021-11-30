@@ -1,4 +1,4 @@
-package com.example.fastadapter.adapter
+package com.example.fastadapter.feature.diffutil
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
