@@ -43,7 +43,6 @@ class DiffUtilActivity: AppCompatActivity() {
 
         val items = createData()
         setData(items)
-
     }
 
     private fun setupListener() {
@@ -65,18 +64,18 @@ class DiffUtilActivity: AppCompatActivity() {
                 }))
     }
 
-    private fun setData(items: List<SimpleItem>) {
-        FastAdapterDiffUtil[fastItemAdapter.itemAdapter] = items
+    private fun setData(itemDiffUtils: List<DiffUtilSimpleItem>) {
+        FastAdapterDiffUtil[fastItemAdapter.itemAdapter] = itemDiffUtils
 
         //Add all
         //fastItemAdapter.add(items)
     }
 
-    private fun createData(): List<SimpleItem> {
-        val itemAdapter = ItemAdapter<SimpleItem>()
-        val items = ArrayList<SimpleItem>()
+    private fun createData(): List<DiffUtilSimpleItem> {
+        val itemAdapter = ItemAdapter<DiffUtilSimpleItem>()
+        val items = ArrayList<DiffUtilSimpleItem>()
         for (i in 1..100) {
-            val item = SimpleItem()
+            val item = DiffUtilSimpleItem()
             item.name = "Test $i"
             item.description = (100 + i).toString()
             items.add(item)

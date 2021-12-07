@@ -6,7 +6,7 @@ import com.example.fastadapter.R
 import com.example.fastadapter.databinding.SampleItemBinding
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-class SimpleItem : AbstractBindingItem<SampleItemBinding>() {
+class DiffUtilSimpleItem : AbstractBindingItem<SampleItemBinding>() {
     var name: String? = null
     var description: String? = null
 
