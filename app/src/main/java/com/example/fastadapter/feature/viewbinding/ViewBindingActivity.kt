@@ -19,7 +19,7 @@ class ViewBindingActivity : AppCompatActivity() {
         binding = ActivityViewBindingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mFastAdapter = FastAdapter.with(listOf(itemAdapter, headerAdapter))
+        mFastAdapter = FastAdapter.with(listOf(headerAdapter, itemAdapter))
 
         binding.rv.layoutManager = LinearLayoutManager(this)
         binding.rv.adapter = mFastAdapter
