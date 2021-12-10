@@ -19,29 +19,59 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.drag.ItemTouchCallback
 import com.mikepenz.fastadapter.drag.SimpleDragCallback
 import com.mikepenz.fastadapter.utils.DragDropUtil
-import com.example.fastadapter.feature.draggable.DragHandleTouchEvent
 
 class DraggableActivity : AppCompatActivity(), ItemTouchCallback {
 
     private lateinit var fastAdapter: FastAdapter<GenericItem>
     private lateinit var itemAdapter: ItemAdapter<GenericItem>
     private lateinit var touchHelper: ItemTouchHelper
-    private lateinit var touchCallback: SimpleDragCallback
-
     private lateinit var binding: ActivityDraggableBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDraggableBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Create empty ItemAdapter
         itemAdapter = ItemAdapter.items()
 
-        // Create FastAdapter instance that will manage the whole list
+        setDraggableEventHook()
+
+        fastAdapter.onClickListener =
+            { v: View?, _: IAdapter<GenericItem>, item: GenericItem, _: Int ->
+                if (v != null) {
+
+                }
+                false
+            }
+
+        initRecyclerView()
+        addItemList()
+
+        touchHelper = ItemTouchHelper(SimpleDragCallback(itemTouchCallback = this).apply {
+            // Disable drag & drop on long-press
+            isDragEnabled = false
+        })
+        touchHelper.attachToRecyclerView(binding.rv)
+
+        // Restore the adapter state (this has to be done after adding the items)
+        fastAdapter.withSavedInstanceState(savedInstanceState)
+    }
+
+    private fun initRecyclerView() {
+        binding.rv.layoutManager = LinearLayoutManager(this)
+        binding.rv.itemAnimator = DefaultItemAnimator()
+        binding.rv.adapter = fastAdapter
+
+        val recyclerViewBackgroundColor =
+            ResourcesCompat.getColor(resources, R.color.behindRecyclerView, theme)
+        RecyclerViewBackgroundDrawable(recyclerViewBackgroundColor).attachTo(binding.rv)
+    }
+
+    private fun setDraggableEventHook() {
         fastAdapter = FastAdapter.with(itemAdapter).apply {
             // Add an event hook that manages touching the drag handle
             addEventHook(
-                DragHandleTouchEvent{ position ->
+                DragHandleTouchEvent { position ->
                     binding.rv.findViewHolderForAdapterPosition(position)?.let { viewHolder ->
                         // Start dragging
                         touchHelper.startDrag(viewHolder)
@@ -49,62 +79,19 @@ class DraggableActivity : AppCompatActivity(), ItemTouchCallback {
                 }
             )
         }
-
-        // Handle clicks on our list items
-        fastAdapter.onClickListener = { v: View?, _: IAdapter<GenericItem>, item: GenericItem, _: Int ->
-            if (v != null) {
-                // Perform an action depending on the type of the item
-            }
-            false
-        }
-
-        binding.rv.layoutManager = LinearLayoutManager(this)
-        binding.rv.itemAnimator = DefaultItemAnimator()
-        binding.rv.adapter = fastAdapter
-
-
-        val recyclerViewBackgroundColor = ResourcesCompat.getColor(resources, R.color.behindRecyclerView, theme)
-        RecyclerViewBackgroundDrawable(recyclerViewBackgroundColor).attachTo(binding.rv)
-
-        val listData = buildSampleItemList()
-        itemAdapter.add(listData)
-
-        touchCallback = SimpleDragCallback(itemTouchCallback = this).apply {
-            // Disable drag & drop on long-press
-            isDragEnabled = false
-        }
-        touchHelper = ItemTouchHelper(touchCallback)
-        touchHelper.attachToRecyclerView(binding.rv)
-
-        // Restore the adapter state (this has to be done after adding the items)
-        fastAdapter.withSavedInstanceState(savedInstanceState)
     }
 
-    /* private fun populateData() {
+    private fun addItemList() {
         val items = ArrayList<GenericItem>()
-        val itemsDraggable = ArrayList<DraggableSingleLineItem>()
-        for (i in 1..100) {
-            val item = DraggableSingleLineItem()
-            item.name = "Test $i"
-            item.description = (100 + i).toString()
-            itemsDraggable.add(item)
-        }
-        itemAdapter.add(itemsDraggable)
-    } */
-
-    private fun buildSampleItemList(): ArrayList<GenericItem> {
-        val items = ArrayList<GenericItem>()
-
         val accountItems = (1..5).map { i ->
             DraggableSingleLineItem().apply {
-                name  = "Test $i"
+                name = "Test $i"
                 description = (100 + i).toString()
                 identifier = (100 + i).toLong()
             }
         }
-
         items.addAll(accountItems)
-        return items
+        itemAdapter.add(items)
     }
 
     override fun itemTouchStartDrag(viewHolder: RecyclerView.ViewHolder) {
@@ -119,8 +106,10 @@ class DraggableActivity : AppCompatActivity(), ItemTouchCallback {
 
     override fun itemTouchOnMove(oldPosition: Int, newPosition: Int): Boolean {
         // Determine the "drop area"
-        val firstDropPosition = itemAdapter.adapterItems.indexOfFirst { it is DraggableSingleLineItem }
-        val lastDropPosition = itemAdapter.adapterItems.indexOfLast { it is DraggableSingleLineItem }
+        val firstDropPosition =
+            itemAdapter.adapterItems.indexOfFirst { it is DraggableSingleLineItem }
+        val lastDropPosition =
+            itemAdapter.adapterItems.indexOfLast { it is DraggableSingleLineItem }
 
         // Only move the item if the new position is inside the "drop area"
         return if (newPosition in firstDropPosition..lastDropPosition) {
@@ -129,6 +118,7 @@ class DraggableActivity : AppCompatActivity(), ItemTouchCallback {
             true
         } else {
             false
-        }    }
+        }
+    }
 
 }
