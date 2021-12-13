@@ -53,7 +53,23 @@ dependencies {
     // Fast Adapter Drag
     implementation "com.mikepenz:fastadapter-extensions-drag:${latestFastAdapterRelease}"
 
-    implementation "com.mikepenz:fastadapter-extensions-utils:${latestFastAdapterRelease}" // needs the `expandable`, `drag` and `scroll` extension.
+    // Fast Adapter Expandable
+    implementation "com.mikepenz:fastadapter-extensions-expandable:${latestFastAdapterRelease}"
+
+    // Needs the `expandable`, `drag` and `scroll` extension.
+    implementation "com.mikepenz:fastadapter-extensions-utils:${latestFastAdapterRelease}"
+
+    // pre-defined ui components
+    implementation "com.mikepenz:fastadapter-extensions-ui:${latestFastAdapterRelease}"
+
+    //used to provide different itemAnimators for the RecyclerView
+    //https://github.com/mikepenz/ItemAnimators
+    implementation 'com.mikepenz:itemanimators:1.1.0'
+
+    //the core iconics library (without any widgets)
+    def latestAndroidIconicsRelease = "5.2.8"
+    implementation "com.mikepenz:iconics-core:${latestAndroidIconicsRelease}"
+    implementation "com.mikepenz:fastadapter-extensions-expandable:${latestFastAdapterRelease}"
 
     //RxJava
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'

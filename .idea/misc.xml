@@ -3,11 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_drag_handle.xml" value="0.16666666666666666" />
         <entry key="app/src/main/res/layout/activity_diifutil.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/layout/activity_draggable.xml" value="0.14895833333333333" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.12447916666666667" />
+        <entry key="app/src/main/res/layout/activity_expandable.xml" value="0.2717948717948718" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3622050209752635" />
         <entry key="app/src/main/res/layout/activity_view_binding.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/layout/draggable_single_line_item.xml" value="0.14895833333333333" />
+        <entry key="app/src/main/res/layout/expandable_item.xml" value="0.6409196391319868" />
         <entry key="app/src/main/res/layout/sample_item.xml" value="0.4351477153238366" />
       </map>
     </option>

@@ -18,6 +18,8 @@
         <activity
             android:name=".feature.viewbinding.ViewBindingActivity"
             android:exported="false" />
+        <activity android:name=".feature.expandable.ExpandableActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.fastadapter.databinding.ActivityMainBinding
 import com.example.fastadapter.feature.diffutil.DiffUtilActivity
 import com.example.fastadapter.feature.draggable.DraggableActivity
+import com.example.fastadapter.feature.expandable.ExpandableActivity
 import com.example.fastadapter.feature.viewbinding.ViewBindingActivity
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +32,10 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnDraggable.setOnClickListener {
             val intent = Intent(this@MainActivity, DraggableActivity::class.java)
+            startActivities(arrayOf(intent))
+        }
+        binding.btnExpandable.setOnClickListener {
+            val intent = Intent(this@MainActivity, ExpandableActivity::class.java)
             startActivities(arrayOf(intent))
         }
     }

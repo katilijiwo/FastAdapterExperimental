@@ -15,7 +15,7 @@
         android:lines="1"
         android:singleLine="true"
         android:textDirection="anyRtl"
-        android:textSize="24sp"
+        android:textSize="14sp"
         tools:text="Some drawer text" />
 
     <TextView
@@ -27,6 +27,6 @@
         android:lines="1"
         android:singleLine="true"
         android:textDirection="anyRtl"
-        android:textSize="16sp"
+        android:textSize="14sp"
         tools:text="Some drawer text" />
 </LinearLayout>
